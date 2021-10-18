@@ -43,7 +43,14 @@ void get_int()
 	{
 		len=line.length();
 		check_int=true;
-		for(int i=0;i<len;++i)
+
+		if(line[0]!='-' && !isdigit(line[0]))
+		{
+			check_int=false;
+			goto exit_for_int;
+		}
+
+		for(int i=1;i<len;++i)
 		{
 			if(!isdigit(line[i]))
 			{
@@ -52,6 +59,7 @@ void get_int()
 			}
 		}
 
+		exit_for_int:
 		if(check_int)
 		{
 			std::cout<<"You have entered a valid integer"<<"   "<<line<<std::endl;
@@ -77,7 +85,15 @@ void get_double()
 		len=line.length();
 		check_int=true;
 		check_double=true;
-		for(int i=0;i<len;++i)
+
+		if(line[0]!='-' && !isdigit(line[0]))
+		{
+			check_int=false;
+			check_double=false;
+			goto exit_for_double;
+		}
+
+		for(int i=1;i<len;++i)
 		{
 			if(!isdigit(line[i]) && line[i]!='.')
 			{
@@ -96,6 +112,7 @@ void get_double()
 			}
 		}
 
+		exit_for_double:
 		if(check_double && !check_int)
 		{
 			std::cout<<"You have entered a valid double"<<"   "<<line<<std::endl;
