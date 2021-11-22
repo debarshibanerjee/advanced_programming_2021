@@ -149,7 +149,7 @@ class List {
     };
   }
 
-  T* last_node() {
+  node* last_node() {
     auto tmp = head.get();
     while (tmp->next) {
       tmp = tmp->next.get();
@@ -167,12 +167,7 @@ class List {
   }
 
   void push_back(T&& x) {
-    auto tmp = last_node();
-    // auto tmp=head.get();
-    // while(tmp->next) {
-    //	tmp=tmp->next.get();
-    //}
-    tmp->next = std::make_unique<node>(std::move(x), nullptr);
+    last_node()->next = std::make_unique<node>(std::move(x), nullptr);
   }
 
   void push_front(const T& x) {
@@ -201,8 +196,10 @@ class List {
 int main() {
   List<int> l;
   l.insert(3, method::push_front);
-  l.insert(4, method::push_front);
-  l.insert(5, method::push_back);
+  l.insert(5, method::push_front);
+  l.insert(7, method::push_back);
+  l.insert(11, method::push_back);
+  l.insert(13, method::push_front);
 
   for (auto x : l)
     std::cout << x << std::endl;
